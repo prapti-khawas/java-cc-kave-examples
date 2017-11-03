@@ -15,8 +15,11 @@
  * the License.
  */
 
+import examples.DebuggerEventDataPrep;
 import examples.GettingStarted;
 import examples.GettingStartedContexts;
+import examples.Try;
+import examples.UserProfileDataPrep;
 
 public class RunMe {
 
@@ -31,11 +34,15 @@ public class RunMe {
 	/*
 	 * download the context data and follow the same instructions as before.
 	 */
-	public static String contextsDir = "Contexts-170301";
+	public static String contextsDir = "Contexts-170503";
 
 	public static void main(String[] args) {
 
-		new GettingStarted(eventsDir).run();
-		new GettingStartedContexts(contextsDir).run();
+//		new GettingStarted(eventsDir).run();
+		//new GettingStartedContexts(contextsDir).run();
+		//new Try(eventsDir).run();
+		//new UserProfileDataPrep(eventsDir).run();
+		//new DebuggerEventDataPrep(eventsDir).run();
+		new DebuggerEventDataPrep(eventsDir).getAverageSteps();
 	}
 }

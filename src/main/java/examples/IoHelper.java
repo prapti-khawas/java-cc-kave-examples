@@ -15,7 +15,10 @@
  */
 package examples;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -71,5 +74,69 @@ public class IoHelper {
 	 */
 	public static Set<String> findAllZips(String dir) {
 		return new Directory(dir).findFiles(s -> s.endsWith(".zip"));
+	}
+	
+	public static boolean writeZip(String filepath, String jsonString, String folder, String filename) {
+		File file = new File(filepath);
+		if (!file.exists()) {
+			if (file.mkdir()) {
+				System.out.println("Directory created :"+ file);
+				File file2 = new File(filepath+"/"+folder);
+				if (!file2.exists()) 
+					if (file2.mkdir()) {
+						System.out.println("Directory created :"+ file2);
+					}
+			} else {
+				System.out.println("Unable to create directory");
+			}
+		} else {
+			File file2 = new File(filepath+"/"+folder);
+			if (!file2.exists()) {
+				if (file2.mkdir()) {
+					System.out.println("Directory created :"+ file2);
+				}
+			} else {
+				System.out.println("Appending to Directory:" + file2);
+			}
+		}
+		try (FileWriter fileWriter = new FileWriter(filepath+"/"+folder+"/"+filename+".json")) {
+			fileWriter.write(jsonString);
+			System.out.println("Successfully Copied JSON Object to File...");
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+		return true;
+	}
+	
+	public static void appendToFile(String filename, String text) {
+		File f1 = new File(filename);
+		try {
+			if(!f1.exists()) {
+				f1.createNewFile();
+	         }
+			BufferedWriter bw = new BufferedWriter(new FileWriter(filename, true));
+			bw.write(text);
+			bw.newLine();
+			bw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void writeToFile(String filename, String text) {
+		File f1 = new File(filename);
+		try {
+			if(!f1.exists()) {
+				f1.createNewFile();
+	         }
+			BufferedWriter bw = new BufferedWriter(new FileWriter(filename, false));
+			bw.write(text);
+			bw.newLine();
+			bw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

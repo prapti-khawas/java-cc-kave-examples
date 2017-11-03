@@ -43,6 +43,6 @@ public class RunMe {
 		//new Try(eventsDir).run();
 		//new UserProfileDataPrep(eventsDir).run();
 		//new DebuggerEventDataPrep(eventsDir).run();
-		new DebuggerEventDataPrep(eventsDir).getAverageSteps();
+//		new DebuggerEventDataPrep(eventsDir).getAverageSteps();
 	}
 }
